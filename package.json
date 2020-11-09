@@ -25,6 +25,7 @@
         "deploy": "gh-pages -d build",
         "predeploy": "yarn run build"
     },
+    "homepage": "github.com/MikeHyungiLee/popcorntime_clone",
     "eslintConfig": {
         "extends": "react-app"
     },
