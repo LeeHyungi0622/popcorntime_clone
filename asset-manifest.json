@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/static/js/main.60d7efe0.chunk.js",
-    "main.js.map": "/static/js/main.60d7efe0.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.258df3c8.js",
-    "runtime-main.js.map": "/static/js/runtime-main.258df3c8.js.map",
-    "static/js/2.6af3d05f.chunk.js": "/static/js/2.6af3d05f.chunk.js",
-    "static/js/2.6af3d05f.chunk.js.map": "/static/js/2.6af3d05f.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.910789466901c7b9947c03c1319cbe34.js": "/precache-manifest.910789466901c7b9947c03c1319cbe34.js",
-    "service-worker.js": "/service-worker.js",
-    "static/js/2.6af3d05f.chunk.js.LICENSE.txt": "/static/js/2.6af3d05f.chunk.js.LICENSE.txt"
+    "main.js": "/popcorntime_clone/static/js/main.60d7efe0.chunk.js",
+    "main.js.map": "/popcorntime_clone/static/js/main.60d7efe0.chunk.js.map",
+    "runtime-main.js": "/popcorntime_clone/static/js/runtime-main.c2e4b724.js",
+    "runtime-main.js.map": "/popcorntime_clone/static/js/runtime-main.c2e4b724.js.map",
+    "static/js/2.6dd774cf.chunk.js": "/popcorntime_clone/static/js/2.6dd774cf.chunk.js",
+    "static/js/2.6dd774cf.chunk.js.map": "/popcorntime_clone/static/js/2.6dd774cf.chunk.js.map",
+    "index.html": "/popcorntime_clone/index.html",
+    "precache-manifest.f848c0d63a88173d0ba47a86463c1900.js": "/popcorntime_clone/precache-manifest.f848c0d63a88173d0ba47a86463c1900.js",
+    "service-worker.js": "/popcorntime_clone/service-worker.js",
+    "static/js/2.6dd774cf.chunk.js.LICENSE.txt": "/popcorntime_clone/static/js/2.6dd774cf.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.258df3c8.js",
-    "static/js/2.6af3d05f.chunk.js",
+    "static/js/runtime-main.c2e4b724.js",
+    "static/js/2.6dd774cf.chunk.js",
     "static/js/main.60d7efe0.chunk.js"
   ]
 }
