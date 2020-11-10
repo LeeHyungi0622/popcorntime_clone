@@ -6,6 +6,7 @@ import {Link, Route} from "react-router-dom";
 import Companies from "./Companies";
 import Overview from "./Overview";
 import Countries from "./Countries";
+import Seasons from "./Seasons";
 
 const Container = styled.div`
   /* 100vh(viewport width)에서 맨위에 표시된 Navigation bar의 높이를 빼준다. */
@@ -166,11 +167,14 @@ const DetailPresenter = ({ result, loading, error, pathname, isMovie }) =>
                 <Link to={isMovie? `/movie/${result.id}/overview` : `/show/${result.id}/overview`}>Overview</Link>
               </ListItem>
               <ListItem active={pathname === `/movie/${result.id}/companies` || pathname === `/show/${result.id}/companies`}>
-                <Link to={isMovie? `/movie/${result.id}/companies` : `/show/${result.id}/companies`}>Companies</Link>
+                <Link to={isMovie? `/movie/${result.id}/companies` : `/show/${result.id}/companies`}>Production Companies</Link>
               </ListItem>
-              <ListItem active={pathname === `/movie/${result.id}/countries`}>
-                <Link to={isMovie? `/movie/${result.id}/countries` : `/show/${result.id}/countries`}>Countries</Link>
-              </ListItem>
+              {isMovie? (<ListItem active={pathname === `/movie/${result.id}/countries`}>
+                <Link to={`/movie/${result.id}/countries`}>Production Countries</Link>
+              </ListItem>) : (<ListItem active={pathname === `/show/${result.id}/seasons`}>
+                <Link to={`/show/${result.id}/seasons`}>Seasons</Link>
+              </ListItem>)}
+              
             </List>
           </TabContainer>
           <Route path="/movie/:id" exact component={Overview}/>
@@ -181,6 +185,7 @@ const DetailPresenter = ({ result, loading, error, pathname, isMovie }) =>
           <Route path="/show/:id/overview" component={Overview} />
           <Route path="/show/:id/companies" component={Companies} />
           <Route path="/show/:id/countries" component={Countries} />
+          <Route path="/show/:id/seasons" component={Seasons} />
           
         </Data>
       </Content>
