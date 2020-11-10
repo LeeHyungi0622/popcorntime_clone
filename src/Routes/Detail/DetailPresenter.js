@@ -2,6 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import Loader from "../../Components/Loader";
+import {Link, Route} from "react-router-dom";
+import Companies from "./Companies";
+import Overview from "./Overview";
 
 const Container = styled.div`
   /* 100vh(viewport width)에서 맨위에 표시된 Navigation bar의 높이를 빼준다. */
@@ -51,6 +54,11 @@ const Data = styled.div`
 const Title = styled.span`
   font-size: 32px;
   margin-bottom: 10px;
+  a img{
+    margin-left: 15px;
+    width: 50px;
+    height: 25px;
+  }
 `;
 
 const ItemContainer = styled.div`
@@ -63,17 +71,51 @@ const Divider = styled.span`
   margin: 0 10px;
 `;
 
-const Overview = styled.p`
-  font-size: 12px;
-  opacity: 0.7;
-  line-height: 1.5;
-  width: 50%;
+const VideoContainer = styled.div`
+  width: 100%;
+  height: 80%;
+  margin-top: 45px;
+  iframe{
+    width: 100%;
+    height: 500px;
+  }
 `;
 
-const DetailPresenter = ({ result, loading, error }) =>
+const OutContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const TabContainer = styled.div`
+display: flex;
+`;
+const List = styled("ul")`
+  display: flex;
+`;
+
+const ListItem = styled("li")`
+  margin-right: 20px;
+  text-transform: uppercase;
+  font-weight: 600;
+  border: 2px solid #1abc9c;
+  padding: 5px;
+  background-color: ${props => (props.active ? "#1abc9c" : "transparent")};
+`;
+
+const DetailPresenter = ({ result, loading, error, pathname }) =>
   loading ? (
     <Loader />
   ) : (
+    <>
+    <OutContainer>
+    <VideoContainer>
+        <section>
+          <iframe src={`https://www.youtube.com/embed/${result.videos.results[0]["key"]}?autoplay=1`} title="Youtube"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
+
+          </iframe>
+        </section>
+      </VideoContainer>
     <Container>
       <Backdrop
         bgImage={`https://image.tmdb.org/t/p/original${result.backdrop_path}`}
@@ -91,6 +133,12 @@ const DetailPresenter = ({ result, loading, error }) =>
             {result.original_title
               ? result.original_title
               : result.original_name}
+              {result.imdb_id
+              ? <a href={`https://www.imdb.com/title/${result.imdb_id}`} target="_blank">
+                  <img src={require("../../assets/imdb.png")} alt="imdb_icon"/>
+                </a>
+              : ""}
+              
           </Title>
           <ItemContainer>
             <Item>
@@ -112,10 +160,28 @@ const DetailPresenter = ({ result, loading, error }) =>
                 )}
             </Item>
           </ItemContainer>
-          <Overview>{result.overview}</Overview>
+          <TabContainer>
+            <List>
+              <ListItem active={pathname === `/movie/${result.id}/overview` || pathname === `/movie/${result.id}`}>
+                <Link to={`/movie/${result.id}/overview`}>Overview</Link>
+              </ListItem>
+              <ListItem active={pathname === `/movie/${result.id}/companies`}>
+                <Link to={`/movie/${result.id}/companies`}>Companies</Link>
+              </ListItem>
+              <ListItem active={pathname === `/movie/${result.id}/recommend`}>
+                <Link to={``}>Recommend</Link>
+              </ListItem>
+            </List>
+          </TabContainer>
+          <Route path="/movie/:id" exact component={Overview}/>
+          <Route path="/movie/:id/overview" component={Overview} />
+          <Route path="/movie/:id/companies" component={Companies} />
+          
         </Data>
       </Content>
     </Container>
+    </OutContainer>
+    </>
   );
 
 DetailPresenter.propTypes = {
