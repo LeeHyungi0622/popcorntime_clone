@@ -5,6 +5,7 @@ import Loader from "../../Components/Loader";
 import {Link, Route} from "react-router-dom";
 import Companies from "./Companies";
 import Overview from "./Overview";
+import Countries from "./Countries";
 
 const Container = styled.div`
   /* 100vh(viewport width)에서 맨위에 표시된 Navigation bar의 높이를 빼준다. */
@@ -110,19 +111,17 @@ const DetailPresenter = ({ result, loading, error, pathname, isMovie }) =>
     <OutContainer>
     <VideoContainer>
         <section>
-          <iframe src={`https://www.youtube.com/embed/${result.videos.results[0]["key"]}?autoplay=1`} title="Youtube"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
-
-          </iframe>
+          {result && <iframe src={`https://www.youtube.com/embed/${result.videos.results[0]["key"]}?autoplay=1`} title="Youtube"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>}
         </section>
       </VideoContainer>
     <Container>
       <Backdrop
-        bgImage={`https://image.tmdb.org/t/p/original${result.backdrop_path}`}
+        bgImage={result && `https://image.tmdb.org/t/p/original${result.backdrop_path}`}
       />
       <Content>
         <Cover
-          bgImage={
+          bgImage={ result && 
             result.poster_path
               ? `https://image.tmdb.org/t/p/original${result.poster_path}`
               : require("../../assets/noPosterSmall.png")
@@ -130,7 +129,8 @@ const DetailPresenter = ({ result, loading, error, pathname, isMovie }) =>
         />
         <Data>
           <Title>
-            {result.original_title
+            {result &&
+            result.original_title
               ? result.original_title
               : result.original_name}
               {result.imdb_id
@@ -168,8 +168,8 @@ const DetailPresenter = ({ result, loading, error, pathname, isMovie }) =>
               <ListItem active={pathname === `/movie/${result.id}/companies` || pathname === `/show/${result.id}/companies`}>
                 <Link to={isMovie? `/movie/${result.id}/companies` : `/show/${result.id}/companies`}>Companies</Link>
               </ListItem>
-              <ListItem active={pathname === `/movie/${result.id}/recommend`}>
-                <Link to={isMovie? `/movie/${result.id}/recommend` : `/show/${result.id}/recommend`}>Recommend</Link>
+              <ListItem active={pathname === `/movie/${result.id}/countries`}>
+                <Link to={isMovie? `/movie/${result.id}/countries` : `/show/${result.id}/countries`}>Countries</Link>
               </ListItem>
             </List>
           </TabContainer>
@@ -177,8 +177,10 @@ const DetailPresenter = ({ result, loading, error, pathname, isMovie }) =>
           <Route path="/show/:id" exact component={Overview}/>
           <Route path="/movie/:id/overview" component={Overview} />
           <Route path="/movie/:id/companies" component={Companies} />
+          <Route path="/movie/:id/countries" component={Countries} />
           <Route path="/show/:id/overview" component={Overview} />
           <Route path="/show/:id/companies" component={Companies} />
+          <Route path="/show/:id/countries" component={Countries} />
           
         </Data>
       </Content>
