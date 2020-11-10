@@ -51,7 +51,7 @@ export default function Countries({ location:{ pathname },match: { params: { id 
                     {movie.production_countries.map((country, index) => (
                         <Country key={`${country}${index}`}>
                             <h1>{country.name}</h1>
-                            <img src={`https://image.tmdb.org/t/p/w300${country.poster_path}.jpg`} title={country.name} />
+                            <img src={`https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.3/flags/4x3/${country.iso_3166_1.toLowerCase()}.svg`} title={country.iso_3166_1} />
                         </Country>
                     ))}
                 </CountriesContainer>    
