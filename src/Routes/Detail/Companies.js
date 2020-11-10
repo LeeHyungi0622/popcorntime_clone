@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { moviesApi } from "../../api";
+import { moviesApi, tvApi } from "../../api";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -17,15 +17,20 @@ const Company = styled.div`
     }
 `;
 
-export default function Companies({ match: { params: { id } } }) {
+export default function Companies({ location:{ pathname }, match: { params: { id } } }) {
     const [loading, setLoading] = useState(true);
     const [companies, setCompanies] = useState([]);
-
+    const isMovie = pathname.includes("/movie/");
     const getCompaniesInfo = async() => {
-
         try {
-            const { data } = await moviesApi.movieDetail(id);
-            setCompanies(data);
+            if(isMovie){
+                const { data } = await moviesApi.movieDetail(id);
+                setCompanies(data);
+            }else{
+                const { data } = await tvApi.showDetail(id);
+                setCompanies(data);
+            }
+            
         } catch (err) {
             console.log(err)
         } finally {
@@ -47,7 +52,8 @@ export default function Companies({ match: { params: { id } } }) {
                 {companies.production_companies.map((company, index)=> 
                     <Company key={`${index}${company.name}`}>
                         <h1>{company.name}, {company.origin_country}</h1>
-                        <img src={`https://image.tmdb.org/t/p/w300/${company.logo_path}`} alt="company_logo"/>
+                        {company.logo_path?(<img src={`https://image.tmdb.org/t/p/w300/${company.logo_path}`}/>):""}
+                        
                     </Company>    
                 )}
             </>}

@@ -102,7 +102,7 @@ const ListItem = styled("li")`
   background-color: ${props => (props.active ? "#1abc9c" : "transparent")};
 `;
 
-const DetailPresenter = ({ result, loading, error, pathname }) =>
+const DetailPresenter = ({ result, loading, error, pathname, isMovie }) =>
   loading ? (
     <Loader />
   ) : (
@@ -162,20 +162,23 @@ const DetailPresenter = ({ result, loading, error, pathname }) =>
           </ItemContainer>
           <TabContainer>
             <List>
-              <ListItem active={pathname === `/movie/${result.id}/overview` || pathname === `/movie/${result.id}`}>
-                <Link to={`/movie/${result.id}/overview`}>Overview</Link>
+              <ListItem active={isMovie? pathname === `/movie/${result.id}/overview` || pathname === `/movie/${result.id}`: pathname === `/show/${result.id}/overview` || pathname === `/show/${result.id}`}>
+                <Link to={isMovie? `/movie/${result.id}/overview` : `/show/${result.id}/overview`}>Overview</Link>
               </ListItem>
-              <ListItem active={pathname === `/movie/${result.id}/companies`}>
-                <Link to={`/movie/${result.id}/companies`}>Companies</Link>
+              <ListItem active={pathname === `/movie/${result.id}/companies` || pathname === `/show/${result.id}/companies`}>
+                <Link to={isMovie? `/movie/${result.id}/companies` : `/show/${result.id}/companies`}>Companies</Link>
               </ListItem>
               <ListItem active={pathname === `/movie/${result.id}/recommend`}>
-                <Link to={``}>Recommend</Link>
+                <Link to={isMovie? `/movie/${result.id}/recommend` : `/show/${result.id}/recommend`}>Recommend</Link>
               </ListItem>
             </List>
           </TabContainer>
           <Route path="/movie/:id" exact component={Overview}/>
+          <Route path="/show/:id" exact component={Overview}/>
           <Route path="/movie/:id/overview" component={Overview} />
           <Route path="/movie/:id/companies" component={Companies} />
+          <Route path="/show/:id/overview" component={Overview} />
+          <Route path="/show/:id/companies" component={Companies} />
           
         </Data>
       </Content>

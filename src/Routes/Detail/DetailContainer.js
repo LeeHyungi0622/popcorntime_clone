@@ -46,12 +46,13 @@ export default class extends Component {
     render() {
         console.log(this.state);
         const { location: { pathname } } = this.props;
-        const { result, error, loading } = this.state;
+        const { result, error, loading, isMovie } = this.state;
         console.log("check result : ", result)
         return <DetailPresenter result = { result }
         error = { error }
         loading = { loading }
         pathname = { pathname }
+        isMovie = { isMovie }
         />;
     }
 }
