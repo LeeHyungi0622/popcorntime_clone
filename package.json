@@ -25,7 +25,7 @@
         "deploy": "gh-pages -d build",
         "predeploy": "yarn run build"
     },
-    "homepage": "https://determined-agnesi-67efde.netlify.app",
+    "homepage": "https://tender-lalande-7506e5.netlify.app",
     "eslintConfig": {
         "extends": "react-app"
     },
