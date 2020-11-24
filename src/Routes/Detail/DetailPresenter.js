@@ -110,12 +110,17 @@ const DetailPresenter = ({ result, loading, error, pathname, isMovie }) =>
   ) : (
     <>
     <OutContainer>
-    <VideoContainer>
+    {result.videos.results[0]? (
+      <VideoContainer>
         <section>
           {result && <iframe src={`https://www.youtube.com/embed/${result.videos.results[0]["key"]}?autoplay=1`} title="Youtube"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>}
         </section>
       </VideoContainer>
+    ):(
+      <section>
+      </section>
+    )}
     <Container>
       <Backdrop
         bgImage={result && `https://image.tmdb.org/t/p/original${result.backdrop_path}`}
