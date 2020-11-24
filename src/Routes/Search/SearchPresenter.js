@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import Loader from "../../Components/Loader";
 import Section from "Components/Section";
-import { moviesApi } from "../../api";
 import Message from "Components/Message";
 import Poster from "../../Components/Poster";
 
@@ -56,7 +55,7 @@ const SearchPresenter = ({
                 title={movie.original_title}
                 rating={movie.vote_average}
                 year={movie.release_date && movie.release_date.substring(0, 4)}
-                isMovie={false}
+                isMovie={true}
               />
             ))}
           </Section>

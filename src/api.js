@@ -23,7 +23,7 @@ export const moviesApi = {
             params: {
                 // 실제로 URL상에서 space나 특수문자는 encode된 상태로 넘어가기 때문에 다음과 같이
                 // encodeURIComponent()를 사용해서 encoding 처리를 해준다.
-                query: encodeURIComponent(term)
+                query: term
             }
         })
 };
